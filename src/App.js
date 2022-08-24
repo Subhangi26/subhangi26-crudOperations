@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react";
-import { User } from "./components/User";
-import { AddUser } from "./components/AddUser";
+import { Post } from "./components/Post";
+import { Addpost } from "./components/Addpost";
 import "./App.css";
 
 export default function App() {
-  const [users, setUsers] = useState([]);
+  const [posts, setPosts] = useState([]);
 
   useEffect(() => {
     fetchData();
@@ -13,7 +13,7 @@ export default function App() {
   const fetchData = async () => {
     await fetch("https://jsonplaceholder.typicode.com/posts")
       .then((response) => response.json())
-      .then((data) => setUsers(data))
+      .then((data) => setPosts(data))
       .catch((error) => console.log(error));
   };
 
@@ -36,7 +36,7 @@ export default function App() {
         }
       })
       .then((data) => {
-        setUsers((users) => [...users, data]);
+        setPosts((posts) => [...posts, data]);
       })
       .catch((error) => console.log(error));
   };
@@ -60,17 +60,16 @@ export default function App() {
         }
       })
       .then((data) => {
-        // setUsers((users) => [...users, data]);
-        const updatedUsers = users.map((user) => {
-          if (user.id === id) {
-            user.title = title;
-            user.body = body;
+        const updatedPosts = posts.map((post) => {
+          if (post.id === id) {
+            post.title = title;
+            post.body = body;
           }
 
-          return user;
+          return post;
         });
 
-        setUsers((users) => updatedUsers);
+        setPosts((posts) => updatedPosts);
       })
       .catch((error) => console.log(error));
   };
@@ -83,9 +82,9 @@ export default function App() {
         if (response.status !== 200) {
           return;
         } else {
-          setUsers(
-            users.filter((user) => {
-              return user.id !== id;
+          setPosts(
+            posts.filter((post) => {
+              return post.id !== id;
             })
           );
         }
@@ -96,13 +95,13 @@ export default function App() {
   return (
     <div classtitle="App">
       <h1>Posts</h1>
-      <AddUser onAdd={onAdd} />
-      {users.map((user) => (
-        <User
-          id={user.id}
-          key={user.id}
-          title={user.title}
-          body={user.body}
+      <Addpost onAdd={onAdd} />
+      {posts.map((post) => (
+        <Post
+          id={post.id}
+          key={post.id}
+          title={post.title}
+          body={post.body}
           onEdit={onEdit}
           onDelete={onDelete}
         />

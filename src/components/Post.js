@@ -1,6 +1,7 @@
 import React, { useState } from "react";
-import './User.css'
-export const User = ({ title, body, id, onEdit, onDelete }) => {
+import './Post.css';
+
+export const Post = ({ title, body, id, onEdit, onDelete }) => {
   const [isEdit, setIsEdit] = useState(false);
 
   const handleEdit = () => {
@@ -26,12 +27,12 @@ export const User = ({ title, body, id, onEdit, onDelete }) => {
           <button onSubmit={handleOnEditSubmit}>Save</button>
         </form>
       ) : (
-        <div className="user">
-          <span className="user-title">{title}</span>
-          <span className="user-body">{body}</span>
+        <div className="post">
+          <span className="post-title">{title}</span>
+          <span className="post-body">{body}</span>
           <div>
-            <button class='btns' onClick={handleEdit}>Edit</button>
-            <button class='btns' onClick={handleDelete}>Delete</button>
+            <button className='btns' onClick={handleEdit}>Edit</button>
+            <button className='btns' onClick={handleDelete}>Delete</button>
           </div>
         </div>
       )}

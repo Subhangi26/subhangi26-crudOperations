@@ -1,6 +1,7 @@
 import React from "react";
 
-export const AddUser = ({ onAdd }) => {
+export const Addpost = ({ onAdd }) => {
+  
   const handleOnSubmit = (evt) => {
     evt.preventDefault();
     onAdd(evt.target.title.value, evt.target.body.value);
